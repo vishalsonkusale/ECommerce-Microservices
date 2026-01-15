@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ECommerce.SharedLibrary.Interface
 {
-    internal interface IGenericInterface<T> where T : class
+    public interface IGenericInterface<T> where T : class
     {
         Task<Response> CreateAsync(T entity);
 
