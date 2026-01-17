@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ECommerce.SharedLibrary.Responses;
 using Microsoft.AspNetCore.Mvc;
 using ProductApi.Application.Dtos;
 using ProductApi.Application.Dtos.Conversions;
@@ -21,7 +21,60 @@ namespace ProductApi.Presentation.Controllers
             }
 
             var (_, list) = ProductConversions.FromEntity(null!, products);
-            return list!.Any() ? Ok(list) : NotFound("No products found") ;
+            return list!.Any() ? Ok(list) : NotFound("No products found");
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ProductDto>> GetProductById(int id)
+        {
+            var productEntity = await product.FindByIdAsync(id);
+            if (productEntity is null)
+            {
+                return NotFound($"Product with ID {id} not found.");
+            }
+
+            var (productDto, _) = ProductConversions.FromEntity(productEntity, null!);
+
+            return productDto is not null ? Ok(productDto) : NotFound($"Product with ID {id} not found.");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Response>> CreateProduct([FromBody] ProductDto productDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var productEntity = ProductConversions.ToEntity(productDto);
+
+            var response = await product.CreateAsync(productEntity);
+            
+            return response.Flag ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Response>> UpdateProduct([FromBody] ProductDto productDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var productEntity = ProductConversions.ToEntity(productDto);
+            
+            var response = await product.UpdateAsync(productEntity);
+
+            return response.Flag ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<Response>> DeleteProduct([FromBody] ProductDto productDto)
+        {
+            var productEntity = ProductConversions.ToEntity(productDto);
+            
+            var response = await product.DeleteAsync(productEntity);
+
+            return response.Flag ? Ok(response) : BadRequest(response);
         }
     }
 }

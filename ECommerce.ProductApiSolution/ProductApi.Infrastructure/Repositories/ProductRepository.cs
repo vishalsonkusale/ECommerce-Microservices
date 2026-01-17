@@ -141,7 +141,7 @@ namespace ProductApi.Infrastructure.Repositories
             {
                 LogException.LogExceptions(ex);
 
-                throw new  Response(false, $"An error occurred while updating the product: {entity.Name}.");
+                 return new Response(false, $"An error occurred while updating the product: {entity.Name}.");
             }
         }
     }
