@@ -1,4 +1,5 @@
 ﻿using OrderApi.Application.Dtos;
+using OrderApi.Application.Dtos.Conversions;
 using OrderApi.Application.Interface;
 using Polly.Registry;
 using System.Net.Http.Json;
@@ -40,7 +41,7 @@ namespace OrderApi.Application.Services
             return user!;
         }
 
-        // Get Order Details by Id
+        // Get Order Details by order Id
         public async Task<OrderDetailsDto> GetOrderDetails(int orderId)
         {
             // Prepare Order
@@ -76,9 +77,21 @@ namespace OrderApi.Application.Services
                 );
         }
 
-        public Task<IEnumerable<OrderDto>> GetOrderByClientId(int clientId)
+        // Get Orders by Client Id
+        public async Task<IEnumerable<OrderDto>> GetOrderByClientId(int clientId)
         {
-            throw new NotImplementedException();
+            // Get all Client Orders
+            var orders = await orderInterface.GetOrdersAsync(o => o.ClientId == clientId);
+
+            if (!orders.Any())
+            {
+                return null!;
+            }
+
+            // Convert from Entity to Dto
+            var (_, ordersDto) = OrderConversions.FromEntity(null, orders);
+
+            return ordersDto!;
         }
 
     }
