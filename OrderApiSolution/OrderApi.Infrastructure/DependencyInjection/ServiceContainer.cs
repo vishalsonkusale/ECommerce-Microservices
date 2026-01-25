@@ -5,11 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using OrderApi.Application.Interface;
 using OrderApi.Infrastructure.Data;
 using OrderApi.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderApi.Infrastructure.DependencyInjection
 {
@@ -20,7 +15,7 @@ namespace OrderApi.Infrastructure.DependencyInjection
             // Register Infrastructure services here
             SharedServiceContainer.AddSharedServices<OrderDbContext>(services, config, config["MySerilog:FileName"]!);
 
-            services.AddSingleton<IOrder, OrderRepository>();
+            services.AddScoped<IOrder, OrderRepository>();
 
             return services;
         }

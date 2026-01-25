@@ -78,7 +78,7 @@ namespace OrderApi.Application.Services
         }
 
         // Get Orders by Client Id
-        public async Task<IEnumerable<OrderDto>> GetOrderByClientId(int clientId)
+        public async Task<IEnumerable<OrderDto>> GetOrdersByClientId(int clientId)
         {
             // Get all Client Orders
             var orders = await orderInterface.GetOrdersAsync(o => o.ClientId == clientId);
