@@ -1,7 +1,7 @@
 ﻿using Authentication.Application.Dtos;
 using Authentication.Application.Interfaces;
 using ECommerce.SharedLibrary.Responses;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Application.Dtos;
 
@@ -9,6 +9,7 @@ namespace Authentication.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthenticationController(IUser user) : ControllerBase
     {
         [HttpPost("register")]
@@ -32,6 +33,7 @@ namespace Authentication.Presentation.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<ActionResult<GetUserDto>> GetUser(int id)
         {
             if (id <= 0) return BadRequest();

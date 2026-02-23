@@ -32,7 +32,7 @@ namespace OrderApi.Application.Services
         {
             // Call User API using HttpClient with Polly resilience pipeline
             // Redirect the call to API gateway since it handles the routing to the User API
-            var getUserRequest = await httpClient.GetAsync($"/api/users/{userId}");
+            var getUserRequest = await httpClient.GetAsync($"/api/authentication/{userId}");
             if (!getUserRequest.IsSuccessStatusCode)
             {
                 return null!;
