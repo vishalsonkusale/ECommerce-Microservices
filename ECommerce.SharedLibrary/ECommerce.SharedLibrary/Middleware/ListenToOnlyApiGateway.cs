@@ -7,7 +7,7 @@ namespace ECommerce.SharedLibrary.Middleware
     {
         public async Task InvokeAsync(HttpContext context)
         {
-            var signedHeaders = context.Response.Headers["Api-Gateway"];
+            var signedHeaders = context.Request.Headers["Api-Gateway"];
 
             // If request is not from API-Gateway, then return Service Unavailable
             if (signedHeaders.FirstOrDefault() is null)

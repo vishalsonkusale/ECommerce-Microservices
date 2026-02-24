@@ -13,11 +13,12 @@
       "UpstreamPathTemplate": "/api/authentication/{everyThing}",
       "UpstreamHttpMethod": [ "GET", "POST" ],
       "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
+        "EnableRateLimiting": false,
         "Period": "60s",
         "Limit": 1,
-        "PeriodTimespan": 10
+        "PeriodTimespan": 10,
+        "ClientWhitelist": [],
+        "ClientIdHeader": "X-ClientId"
       }
     },
 
@@ -140,8 +141,9 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5003",
+    "BaseUrl": "http://localhost:5056",
     "RateLimitOptions": {
+      "EnableRateLimiting": false,
       "QuotaExceededMessage": "You have exceeded the allowed number of requests."
     }
   }
