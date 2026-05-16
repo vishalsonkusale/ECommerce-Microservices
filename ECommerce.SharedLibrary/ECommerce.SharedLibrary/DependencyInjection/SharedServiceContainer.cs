@@ -39,7 +39,7 @@ namespace ECommerce.SharedLibrary.DependencyInjection
             // Use Global Exception Middleware
             app.UseMiddleware<Middleware.GlobalExceptions>();
             // Use Listen To Only Api Gateway Middleware
-            app.UseMiddleware<Middleware.ListenToOnlyApiGateway>();
+            // app.UseMiddleware<Middleware.ListenToOnlyApiGateway>();
             return app;
         }
     }

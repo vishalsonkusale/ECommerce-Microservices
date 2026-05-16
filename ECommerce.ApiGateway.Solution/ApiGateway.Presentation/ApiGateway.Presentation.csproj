@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\ECommerce.SharedLibrary\ECommerce.SharedLibrary\ECommerce.SharedLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="ocelot.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

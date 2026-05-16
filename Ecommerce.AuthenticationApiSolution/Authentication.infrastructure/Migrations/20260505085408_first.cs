@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Authentication.infrastructure.Data.Migrations
+namespace Authentication.infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AuthenticationFirstMigration : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

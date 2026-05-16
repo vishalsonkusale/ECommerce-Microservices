@@ -14,7 +14,7 @@ namespace OrderApi.Application.Services
             // Call Product API using HttpClient with Polly resilience pipeline
             // Redirect the call to API gateway since it handles the routing to the Product API
 
-            var getProductRequest = await httpClient.GetAsync($"/api/products/{productId}");
+            var getProductRequest = await httpClient.GetAsync($"http://localhost:5153/api/products/{productId}");
 
             if (!getProductRequest.IsSuccessStatusCode)
             {

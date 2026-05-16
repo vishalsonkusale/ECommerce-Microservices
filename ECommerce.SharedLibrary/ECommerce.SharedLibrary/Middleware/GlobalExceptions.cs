@@ -1,4 +1,4 @@
-﻿using ECommerce.SharedLibrary.Logs;
+﻿//using ECommerce.SharedLibrary.Logs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -45,7 +45,7 @@ namespace ECommerce.SharedLibrary.Middleware
             catch (Exception ex)
             {
                 // Log the exception details
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                 // If exception is timeout
                 if (ex is TaskCanceledException || ex is TimeoutException)

@@ -1,0 +1,88 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: ECommerce.ApiGateway.Solution/ApiGateway.Presentation/ApiGateway.Presentation.csproj
+        APP_DLL: ApiGateway.Presentation.dll
+    image: ecommerce-api-gateway
+    container_name: ecommerce-api-gateway
+    ports:
+      - "5056:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      Authentication__Key: wZpewJjHAUTxY2bwfGLO3dzSpkeAgTB1
+      Authentication__Issuer: http://localhost:5180
+      Authentication__Audience: http://localhost:5180
+    volumes:
+      - ./ECommerce.ApiGateway.Solution/ApiGateway.Presentation/ocelot.Docker.json:/app/ocelot.json:ro
+    depends_on:
+      - authentication-api
+      - product-api
+      - order-api
+
+  authentication-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: Ecommerce.AuthenticationApiSolution/Authentication.Presentation/Authentication.Presentation.csproj
+        APP_DLL: Authentication.Presentation.dll
+    image: ecommerce-authentication-api
+    container_name: ecommerce-authentication-api
+    ports:
+      - "5180:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__ECommerceDbConnection: Server=host.docker.internal,1433;Database=ECommerceDB;User Id=SA;Password=Vishal@2002;Encrypt=False;TrustServerCertificate=True;
+      Authentication__Key: wZpewJjHAUTxY2bwfGLO3dzSpkeAgTB1
+      Authentication__Issuer: http://localhost:5180
+      Authentication__Audience: http://localhost:5180
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  product-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: ECommerce.ProductApiSolution/ProductApi.Presentation/ProductApi.Presentation.csproj
+        APP_DLL: ProductApi.Presentation.dll
+    image: ecommerce-product-api
+    container_name: ecommerce-product-api
+    ports:
+      - "5153:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__ECommerceDbConnection: Server=host.docker.internal,1433;Database=ECommerceDB;User Id=SA;Password=Vishal@2002;Encrypt=False;TrustServerCertificate=True;
+      Authentication__Key: wZpewJjHAUTxY2bwfGLO3dzSpkeAgTB1
+      Authentication__Issuer: http://localhost:5180
+      Authentication__Audience: http://localhost:5180
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  order-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PROJECT_PATH: OrderApiSolution/OrderApi.Presentation/OrderApi.Presentation.csproj
+        APP_DLL: OrderApi.Presentation.dll
+    image: ecommerce-order-api
+    container_name: ecommerce-order-api
+    ports:
+      - "5152:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__ECommerceDbConnection: Server=host.docker.internal,1433;Database=ECommerceDB;User Id=SA;Password=Vishal@2002;Encrypt=False;TrustServerCertificate=True;
+      Authentication__Key: wZpewJjHAUTxY2bwfGLO3dzSpkeAgTB1
+      Authentication__Issuer: http://localhost:5180
+      Authentication__Audience: http://localhost:5180
+      ApiGateway__BaseAddress: http://api-gateway:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

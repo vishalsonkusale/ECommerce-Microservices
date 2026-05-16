@@ -1,4 +1,4 @@
-﻿using ECommerce.SharedLibrary.Logs;
+﻿//using ECommerce.SharedLibrary.Logs;
 using ECommerce.SharedLibrary.Responses;
 using Microsoft.EntityFrameworkCore;
 using ProductApi.Application.Interfaces;
@@ -38,7 +38,7 @@ namespace ProductApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                 return new Response(false, "An error occurred while creating the product.");
             }
@@ -63,7 +63,7 @@ namespace ProductApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                 return new Response(false, "An error occurred while deleting the product.");
             }
@@ -80,7 +80,7 @@ namespace ProductApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                 throw new Exception("An error occurred while retrieving the product.");
             }
@@ -96,7 +96,7 @@ namespace ProductApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                 throw new Exception("An error occurred while retrieving the product.");
             }
@@ -112,7 +112,7 @@ namespace ProductApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                 throw new Exception("An error occurred while retrieving the product.");
             }
@@ -139,7 +139,7 @@ namespace ProductApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                //LogException.LogExceptions(ex);
 
                  return new Response(false, $"An error occurred while updating the product: {entity.Name}.");
             }

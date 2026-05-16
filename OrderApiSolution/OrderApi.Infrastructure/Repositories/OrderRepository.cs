@@ -1,4 +1,4 @@
-﻿using ECommerce.SharedLibrary.Logs;
+﻿// using ECommerce.SharedLibrary.Logs;
 using ECommerce.SharedLibrary.Responses;
 using Microsoft.EntityFrameworkCore;
 using OrderApi.Application.Interface;
@@ -25,7 +25,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                 return new Response(false, "Error while placing order");
             }
         }
@@ -48,7 +48,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                 return new Response(false, "Error while placing order");
             }
         }
@@ -69,7 +69,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                 throw new Exception("Error while finding order");
             }
         }
@@ -84,7 +84,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                 throw new Exception("Error while getting orders");
             }
         }
@@ -99,7 +99,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                throw new Exception("Error while getting order");
             }
         }
@@ -114,7 +114,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                 throw new Exception("Error while getting orders");
             }
         }
@@ -138,7 +138,7 @@ namespace OrderApi.Infrastructure.Repositories
             }
             catch (Exception ex)
             {
-                LogException.LogExceptions(ex);
+                // LogException.LogExceptions(ex);
                 return new Response(false, "Error while Updating order details");
             }
         }
